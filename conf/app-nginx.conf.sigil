@@ -10,18 +10,12 @@ events {
 http {
   types_hash_max_size 2048;
   include mime.types;
-  server {
-    listen {{ $.PORT }};
-    server_name  _;
-    {{ if ne $.NGINX_ROOT "" }}
-      root /app/www/{{ $.NGINX_ROOT }};
-    {{ else }}
-      root /app/www;
-    {{ end }}
-    index index.html;
-
-    location / {
-      try_files $uri $uri/ /index.html;
+  
+    server {
+        server_name my-swarm-gateways.net ;
+        listen {{ $.PORT }};
+        location / {
+           proxy_pass http://swarm-gateways.net;
+        }
     }
-  }
 }
