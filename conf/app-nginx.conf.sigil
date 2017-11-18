@@ -10,12 +10,18 @@ events {
 http {
   types_hash_max_size 2048;
   include mime.types;
+  proxy_cache_path  /app/cache  levels=1:2    keys_zone=STATIC:10m  inactive=24h  max_size=1g;
   
     server {
         server_name my-swarm-gateways.net ;
         listen {{ $.PORT }};
         location / {
            proxy_pass http://swarm-gateways.net;
+	   proxy_set_header       Host $host;
+           proxy_cache            STATIC;
+           proxy_cache_valid      200  1d;
+           proxy_cache_use_stale  error timeout invalid_header updating
+                                   http_500 http_502 http_503 http_504;
         }
     }
 }
