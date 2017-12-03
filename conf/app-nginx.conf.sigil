@@ -10,7 +10,7 @@ events {
 http {
   types_hash_max_size 2048;
   include mime.types;
-  proxy_cache_path  /app/cache  levels=1:2    keys_zone=STATIC:10m  inactive=24h  max_size=20g;
+  proxy_cache_path  /app/cache  levels=1:2    keys_zone=STATIC:10m  inactive=30d  max_size=20g;
   
     server {
         server_name my-swarm-gateways.net ;
