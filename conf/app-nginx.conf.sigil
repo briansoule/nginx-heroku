@@ -13,11 +13,11 @@ http {
   proxy_cache_path  /app/cache  levels=1:2    keys_zone=STATIC:10m  inactive=30d  max_size=20g;
   
     server {
-        server_name my-swarm-gateways.net ;
+        server_name swarm.show ;
         listen {{ $.PORT }};
         location / {
-           proxy_pass http://swarm-gateways.net;
-	   proxy_set_header Host swarm-gateways.net;
+           proxy_pass http://nyc.ensgateway.com;
+	   proxy_set_header Host nyc.ensgateway.com;
            proxy_cache            STATIC;
            proxy_cache_valid      200  7d;
            proxy_cache_use_stale  error timeout invalid_header updating
