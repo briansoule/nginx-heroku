@@ -16,7 +16,7 @@ http {
         server_name swarm.show ;
         listen {{ $.PORT }};
         location / {
-           proxy_pass http://159.203.168.126;
+           proxy_pass http://nyc.ensgateway.com;
 	   proxy_set_header Host nyc.ensgateway.com;
            proxy_cache            STATIC;
            proxy_cache_valid      200  7d;
